@@ -342,7 +342,7 @@
   </div>
 </template>
 
-<script setup name="${BusinessName}">
+<script setup lang="ts" name="${BusinessName}">
 import { list${BusinessName}, get${BusinessName}, del${BusinessName}, add${BusinessName}, update${BusinessName} } from "@/api/${moduleName}/${businessName}"
 
 const { proxy } = getCurrentInstance()
@@ -504,7 +504,7 @@ function handleUpdate(row) {
 
 /** 提交按钮 */
 function submitForm() {
-  proxy.#[[$]]#refs["${businessName}Ref"].validate(valid => {
+  proxy.#[[$]]#refs["${businessName}Ref"].validate((valid: boolean) => {
     if (valid) {
 #foreach ($column in $columns)
 #if($column.htmlType == "checkbox")

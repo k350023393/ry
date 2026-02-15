@@ -62,8 +62,8 @@
 #end
 #end
       <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button type="primary" icon="Search" size="mini" @click="handleQuery">搜索</el-button>
+        <el-button icon="Refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -72,7 +72,7 @@
         <el-button
           type="primary"
           plain
-          icon="el-icon-plus"
+          icon="Plus"
           size="mini"
           @click="handleAdd"
           v-hasPermi="['${permissionPrefix}:add']"
@@ -82,7 +82,7 @@
         <el-button
           type="success"
           plain
-          icon="el-icon-edit"
+          icon="Edit"
           size="mini"
           :disabled="single"
           @click="handleUpdate"
@@ -93,7 +93,7 @@
         <el-button
           type="danger"
           plain
-          icon="el-icon-delete"
+          icon="Delete"
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
@@ -104,13 +104,13 @@
         <el-button
           type="warning"
           plain
-          icon="el-icon-download"
+          icon="Download"
           size="mini"
           @click="handleExport"
           v-hasPermi="['${permissionPrefix}:export']"
         >导出</el-button>
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="${businessName}List" @selection-change="handleSelectionChange">
@@ -156,14 +156,14 @@
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-edit"
+            icon="Edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['${permissionPrefix}:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-delete"
+            icon="Delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['${permissionPrefix}:remove']"
           >删除</el-button>
@@ -180,7 +180,7 @@
     />
 
     <!-- 添加或修改${functionName}对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
 #foreach($column in $columns)
 #set($field=$column.javaField)
@@ -288,10 +288,10 @@
         <el-divider content-position="center">${subTable.functionName}信息</el-divider>
         <el-row :gutter="10" class="mb8">
           <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd${subClassName}">添加</el-button>
+            <el-button type="primary" icon="Plus" size="mini" @click="handleAdd${subClassName}">添加</el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDelete${subClassName}">删除</el-button>
+            <el-button type="danger" icon="Delete" size="mini" @click="handleDelete${subClassName}">删除</el-button>
           </el-col>
         </el-row>
         <el-table :data="${subclassName}List" :row-class-name="row${subClassName}Index" @selection-change="handle${subClassName}SelectionChange" ref="${subclassName}">
