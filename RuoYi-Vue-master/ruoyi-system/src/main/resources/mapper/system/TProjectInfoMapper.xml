@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TProjectInfoMapper">
+    
+    <resultMap type="TProjectInfo" id="TProjectInfoResult">
+        <result property="id"    column="id"    />
+        <result property="projectCode"    column="project_code"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectFullName"    column="project_full_name"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="projectKind"    column="project_kind"    />
+        <result property="projectClass"    column="project_class"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="actEndDate"    column="act_end_date"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="managerId"    column="manager_id"    />
+        <result property="custManagerId"    column="cust_manager_id"    />
+        <result property="progress"    column="progress"    />
+        <result property="budget"    column="budget"    />
+        <result property="preWorkloadByhour"    column="pre_workload_byhour"    />
+        <result property="actWorkloadByhour"    column="act_workload_byhour"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectTProjectInfoVo">
+        select id, project_code, project_name, project_full_name, project_type, project_kind, project_class, start_date, end_date, act_end_date, status, remark, manager_id, cust_manager_id, progress, budget, pre_workload_byhour, act_workload_byhour, create_time, update_time, create_by, update_by from t_project_info
+    </sql>
+
+    <select id="selectTProjectInfoList" parameterType="TProjectInfo" resultMap="TProjectInfoResult">
+        <include refid="selectTProjectInfoVo"/>
+        <where>  
+            <if test="projectCode != null  and projectCode != ''"> and project_code = #{projectCode}</if>
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectFullName != null  and projectFullName != ''"> and project_full_name like concat('%', #{projectFullName}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="projectKind != null  and projectKind != ''"> and project_kind = #{projectKind}</if>
+            <if test="projectClass != null  and projectClass != ''"> and project_class = #{projectClass}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="actEndDate != null "> and act_end_date = #{actEndDate}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="managerId != null  and managerId != ''"> and manager_id = #{managerId}</if>
+            <if test="custManagerId != null  and custManagerId != ''"> and cust_manager_id = #{custManagerId}</if>
+            <if test="progress != null "> and progress = #{progress}</if>
+            <if test="budget != null "> and budget = #{budget}</if>
+            <if test="preWorkloadByhour != null "> and pre_workload_byhour = #{preWorkloadByhour}</if>
+            <if test="actWorkloadByhour != null "> and act_workload_byhour = #{actWorkloadByhour}</if>
+        </where>
+    </select>
+    
+    <select id="selectTProjectInfoById" parameterType="Long" resultMap="TProjectInfoResult">
+        <include refid="selectTProjectInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTProjectInfo" parameterType="TProjectInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_project_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectCode != null and projectCode != ''">project_code,</if>
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="projectFullName != null and projectFullName != ''">project_full_name,</if>
+            <if test="projectType != null and projectType != ''">project_type,</if>
+            <if test="projectKind != null and projectKind != ''">project_kind,</if>
+            <if test="projectClass != null">project_class,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="actEndDate != null">act_end_date,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="managerId != null">manager_id,</if>
+            <if test="custManagerId != null">cust_manager_id,</if>
+            <if test="progress != null">progress,</if>
+            <if test="budget != null">budget,</if>
+            <if test="preWorkloadByhour != null">pre_workload_byhour,</if>
+            <if test="actWorkloadByhour != null">act_workload_byhour,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectCode != null and projectCode != ''">#{projectCode},</if>
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="projectFullName != null and projectFullName != ''">#{projectFullName},</if>
+            <if test="projectType != null and projectType != ''">#{projectType},</if>
+            <if test="projectKind != null and projectKind != ''">#{projectKind},</if>
+            <if test="projectClass != null">#{projectClass},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="actEndDate != null">#{actEndDate},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="managerId != null">#{managerId},</if>
+            <if test="custManagerId != null">#{custManagerId},</if>
+            <if test="progress != null">#{progress},</if>
+            <if test="budget != null">#{budget},</if>
+            <if test="preWorkloadByhour != null">#{preWorkloadByhour},</if>
+            <if test="actWorkloadByhour != null">#{actWorkloadByhour},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTProjectInfo" parameterType="TProjectInfo">
+        update t_project_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectCode != null and projectCode != ''">project_code = #{projectCode},</if>
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="projectFullName != null and projectFullName != ''">project_full_name = #{projectFullName},</if>
+            <if test="projectType != null and projectType != ''">project_type = #{projectType},</if>
+            <if test="projectKind != null and projectKind != ''">project_kind = #{projectKind},</if>
+            <if test="projectClass != null">project_class = #{projectClass},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="actEndDate != null">act_end_date = #{actEndDate},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="managerId != null">manager_id = #{managerId},</if>
+            <if test="custManagerId != null">cust_manager_id = #{custManagerId},</if>
+            <if test="progress != null">progress = #{progress},</if>
+            <if test="budget != null">budget = #{budget},</if>
+            <if test="preWorkloadByhour != null">pre_workload_byhour = #{preWorkloadByhour},</if>
+            <if test="actWorkloadByhour != null">act_workload_byhour = #{actWorkloadByhour},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTProjectInfoById" parameterType="Long">
+        delete from t_project_info where id = #{id}
+    </delete>
+
+    <delete id="deleteTProjectInfoByIds" parameterType="String">
+        delete from t_project_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
