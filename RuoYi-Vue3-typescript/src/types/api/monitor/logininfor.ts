@@ -4,8 +4,8 @@ import type { PageDomain, BaseEntity } from "../common";
 export interface LogininforQueryParams extends PageDomain {
   /** 登录地址 */
   ipaddr?: string;
-  /** 用户名称 */
-  userName?: string;
+  /** 用户账号 */
+  userCode?: string;
   /** 状态 */
   status?: string;
   /** 登录时间 */
@@ -20,7 +20,7 @@ export interface SysLogininfor extends BaseEntity {
   /** 登录日志编号 */
   infoId?: number;
   /** 用户账号 */
-  userName?: string;
+  userCode?: string;
   /** 登录地址 */
   ipaddr?: string;
   /** 登录地点 */

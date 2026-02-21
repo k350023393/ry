@@ -32,16 +32,16 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     }
 
     /**
-     * 通过用户名称查询信息
+     * 通过用户账号查询信息
      * 
-     * @param userName 用户名称
+     * @param userCode 用户账号
      * @param user 用户信息
      * @return 在线用户信息
      */
     @Override
-    public SysUserOnline selectOnlineByUserName(String userName, LoginUser user)
+    public SysUserOnline selectOnlineByUserCode(String userCode, LoginUser user)
     {
-        if (StringUtils.equals(userName, user.getUsername()))
+        if (StringUtils.equals(userCode, user.getUsername()))
         {
             return loginUserToUserOnline(user);
         }
@@ -49,17 +49,17 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     }
 
     /**
-     * 通过登录地址/用户名称查询信息
+     * 通过登录地址/用户账号查询信息
      * 
      * @param ipaddr 登录地址
-     * @param userName 用户名称
+     * @param userCode 用户账号
      * @param user 用户信息
      * @return 在线用户信息
      */
     @Override
-    public SysUserOnline selectOnlineByInfo(String ipaddr, String userName, LoginUser user)
+    public SysUserOnline selectOnlineByInfo(String ipaddr, String userCode, LoginUser user)
     {
-        if (StringUtils.equals(ipaddr, user.getIpaddr()) && StringUtils.equals(userName, user.getUsername()))
+        if (StringUtils.equals(ipaddr, user.getIpaddr()) && StringUtils.equals(userCode, user.getUsername()))
         {
             return loginUserToUserOnline(user);
         }
@@ -81,7 +81,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
         }
         SysUserOnline sysUserOnline = new SysUserOnline();
         sysUserOnline.setTokenId(user.getToken());
-        sysUserOnline.setUserName(user.getUsername());
+        sysUserOnline.setUserCode(user.getUsername());
         sysUserOnline.setIpaddr(user.getIpaddr());
         sysUserOnline.setLoginLocation(user.getLoginLocation());
         sysUserOnline.setBrowser(user.getBrowser());

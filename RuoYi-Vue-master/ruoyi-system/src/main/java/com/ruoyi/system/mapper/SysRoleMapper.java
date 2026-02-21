@@ -50,12 +50,12 @@ public interface SysRoleMapper
     public SysRole selectRoleById(Long roleId);
 
     /**
-     * 根据用户ID查询角色
+     * 根据用户账号查询角色
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 角色列表
      */
-    public List<SysRole> selectRolesByUserName(String userName);
+    public List<SysRole> selectRolesByUserCode(String userCode);
 
     /**
      * 校验角色名称是否唯一

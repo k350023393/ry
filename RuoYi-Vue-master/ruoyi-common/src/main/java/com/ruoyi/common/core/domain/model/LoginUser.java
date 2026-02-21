@@ -129,7 +129,7 @@ public class LoginUser implements UserDetails
     @Override
     public String getUsername()
     {
-        return user.getUserName();
+        return user.getUserCode();
     }
 
     /**

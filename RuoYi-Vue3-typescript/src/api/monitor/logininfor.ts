@@ -19,9 +19,9 @@ export function delLogininfor(infoId: number | number[]): Promise<AjaxResult> {
 }
 
 // 解锁用户登录状态
-export function unlockLogininfor(userName: string): Promise<AjaxResult> {
+export function unlockLogininfor(userCode: string): Promise<AjaxResult> {
   return request({
-    url: '/monitor/logininfor/unlock/' + userName,
+    url: '/monitor/logininfor/unlock/' + userCode,
     method: 'get'
   })
 }

@@ -5,8 +5,8 @@ import type { PageDomain, AjaxResult, BaseEntity } from "../common";
 
 /** 用户分页查询参数 */
 export interface UserQueryParams extends PageDomain {
-  /** 用户名称 */
-  userName?: string;
+  /** 用户账号 */
+  userCode?: string;
   /** 手机号码 */
   phonenumber?: string;
   /** 状态（0正常 1停用） */
@@ -33,9 +33,9 @@ export interface SysUser extends BaseEntity {
   /** 部门ID */
   deptId?: number;
   /** 用户账号 */
+  userCode?: string;
+  /** 用户名称 */
   userName?: string;
-  /** 用户昵称 */
-  nickName?: string;
   /** 用户邮箱 */
   email?: string;
   /** 手机号码 */
@@ -61,7 +61,7 @@ export interface SysUser extends BaseEntity {
 /** 注册信息 */
 export interface SysRegister {
   /** 用户账号 */
-  userName?: string;
+  userCode?: string;
   /** 密码 */
   password?: string;
   /** 验证码 */

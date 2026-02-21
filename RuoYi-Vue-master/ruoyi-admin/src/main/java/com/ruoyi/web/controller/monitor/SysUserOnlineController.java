@@ -40,24 +40,24 @@ public class SysUserOnlineController extends BaseController
 
     @PreAuthorize("@ss.hasPermi('monitor:online:list')")
     @GetMapping("/list")
-    public TableDataInfo list(String ipaddr, String userName)
+    public TableDataInfo list(String ipaddr, String userCode)
     {
         Collection<String> keys = redisCache.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
         for (String key : keys)
         {
             LoginUser user = redisCache.getCacheObject(key);
-            if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName))
+            if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userCode))
             {
-                userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));
+                userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userCode, user));
             }
             else if (StringUtils.isNotEmpty(ipaddr))
             {
                 userOnlineList.add(userOnlineService.selectOnlineByIpaddr(ipaddr, user));
             }
-            else if (StringUtils.isNotEmpty(userName) && StringUtils.isNotNull(user.getUser()))
+            else if (StringUtils.isNotEmpty(userCode) && StringUtils.isNotNull(user.getUser()))
             {
-                userOnlineList.add(userOnlineService.selectOnlineByUserName(userName, user));
+                userOnlineList.add(userOnlineService.selectOnlineByUserCode(userCode, user));
             }
             else
             {

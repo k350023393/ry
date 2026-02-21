@@ -37,12 +37,12 @@ public interface SysUserMapper
     public List<SysUser> selectUnallocatedList(SysUser user);
 
     /**
-     * 通过用户名查询用户
+     * 通过用户账号查询用户
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 用户对象信息
      */
-    public SysUser selectUserByUserName(String userName);
+    public SysUser selectUserByUserCode(String userCode);
 
     /**
      * 通过用户ID查询用户
@@ -122,12 +122,12 @@ public interface SysUserMapper
     public int deleteUserByIds(Long[] userIds);
 
     /**
-     * 校验用户名称是否唯一
+     * 校验用户账号是否唯一
      * 
-     * @param userName 用户名称
+     * @param userCode 用户账号
      * @return 结果
      */
-    public SysUser checkUserNameUnique(String userName);
+    public SysUser checkUserCodeUnique(String userCode);
 
     /**
      * 校验手机号码是否唯一

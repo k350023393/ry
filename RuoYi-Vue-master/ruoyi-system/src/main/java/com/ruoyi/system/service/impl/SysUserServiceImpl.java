@@ -106,15 +106,15 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
-     * 通过用户名查询用户
+     * 通过用户账号查询用户
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 用户对象信息
      */
     @Override
-    public SysUser selectUserByUserName(String userName)
+    public SysUser selectUserByUserCode(String userCode)
     {
-        return userMapper.selectUserByUserName(userName);
+        return userMapper.selectUserByUserCode(userCode);
     }
 
     /**
@@ -132,13 +132,13 @@ public class SysUserServiceImpl implements ISysUserService
     /**
      * 查询用户所属角色组
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 结果
      */
     @Override
-    public String selectUserRoleGroup(String userName)
+    public String selectUserRoleGroup(String userCode)
     {
-        List<SysRole> list = roleMapper.selectRolesByUserName(userName);
+        List<SysRole> list = roleMapper.selectRolesByUserCode(userCode);
         if (CollectionUtils.isEmpty(list))
         {
             return StringUtils.EMPTY;
@@ -149,13 +149,13 @@ public class SysUserServiceImpl implements ISysUserService
     /**
      * 查询用户所属岗位组
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 结果
      */
     @Override
-    public String selectUserPostGroup(String userName)
+    public String selectUserPostGroup(String userCode)
     {
-        List<SysPost> list = postMapper.selectPostsByUserName(userName);
+        List<SysPost> list = postMapper.selectPostsByUserCode(userCode);
         if (CollectionUtils.isEmpty(list))
         {
             return StringUtils.EMPTY;
@@ -164,16 +164,16 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
-     * 校验用户名称是否唯一
+     * 校验用户账号是否唯一
      * 
      * @param user 用户信息
      * @return 结果
      */
     @Override
-    public boolean checkUserNameUnique(SysUser user)
+    public boolean checkUserCodeUnique(SysUser user)
     {
         Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
-        SysUser info = userMapper.checkUserNameUnique(user.getUserName());
+        SysUser info = userMapper.checkUserCodeUnique(user.getUserCode());
         if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue())
         {
             return UserConstants.NOT_UNIQUE;
@@ -512,7 +512,7 @@ public class SysUserServiceImpl implements ISysUserService
             try
             {
                 // 验证是否存在这个用户
-                SysUser u = userMapper.selectUserByUserName(user.getUserName());
+                SysUser u = userMapper.selectUserByUserCode(user.getUserCode());
                 if (StringUtils.isNull(u))
                 {
                     BeanValidators.validateWithException(validator, user);
@@ -522,7 +522,7 @@ public class SysUserServiceImpl implements ISysUserService
                     user.setCreateBy(operName);
                     userMapper.insertUser(user);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 导入成功");
+                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserCode() + " 导入成功");
                 }
                 else if (isUpdateSupport)
                 {
@@ -535,18 +535,18 @@ public class SysUserServiceImpl implements ISysUserService
                     user.setUpdateBy(operName);
                     userMapper.updateUser(user);
                     successNum++;
-                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 更新成功");
+                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserCode() + " 更新成功");
                 }
                 else
                 {
                     failureNum++;
-                    failureMsg.append("<br/>" + failureNum + "、账号 " + user.getUserName() + " 已存在");
+                    failureMsg.append("<br/>" + failureNum + "、账号 " + user.getUserCode() + " 已存在");
                 }
             }
             catch (Exception e)
             {
                 failureNum++;
-                String msg = "<br/>" + failureNum + "、账号 " + user.getUserName() + " 导入失败：";
+                String msg = "<br/>" + failureNum + "、账号 " + user.getUserCode() + " 导入失败：";
                 failureMsg.append(msg + e.getMessage());
                 log.error(msg, e);
             }

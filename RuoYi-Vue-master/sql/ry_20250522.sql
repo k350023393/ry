@@ -42,8 +42,8 @@ drop table if exists sys_user;
 create table sys_user (
   user_id           bigint(20)      not null auto_increment    comment '用户ID',
   dept_id           bigint(20)      default null               comment '部门ID',
-  user_name         varchar(30)     not null                   comment '用户账号',
-  nick_name         varchar(30)     not null                   comment '用户昵称',
+  user_code         varchar(30)     not null                   comment '用户账号',
+  user_name         varchar(30)     not null                   comment '用户名称',
   user_type         varchar(2)      default '00'               comment '用户类型（00系统用户）',
   email             varchar(50)     default ''                 comment '用户邮箱',
   phonenumber       varchar(11)     default ''                 comment '手机号码',
@@ -561,7 +561,7 @@ insert into sys_config values(8, '用户管理-账号密码更新周期',     's
 drop table if exists sys_logininfor;
 create table sys_logininfor (
   info_id        bigint(20)     not null auto_increment   comment '访问ID',
-  user_name      varchar(50)    default ''                comment '用户账号',
+  user_code      varchar(50)    default ''                comment '用户账号',
   ipaddr         varchar(128)   default ''                comment '登录IP地址',
   login_location varchar(255)   default ''                comment '登录地点',
   browser        varchar(50)    default ''                comment '浏览器类型',

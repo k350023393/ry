@@ -4,13 +4,13 @@
       <el-form :model="form" label-width="80px">
          <el-row>
             <el-col :span="8" :offset="2">
-               <el-form-item label="用户昵称" prop="nickName">
-                  <el-input v-model="form.nickName" disabled />
+               <el-form-item label="用户名称" prop="userName">
+                  <el-input v-model="form.userName" disabled />
                </el-form-item>
             </el-col>
             <el-col :span="8" :offset="2">
-               <el-form-item label="登录账号" prop="userName">
-                  <el-input v-model="form.userName" disabled />
+               <el-form-item label="登录账号" prop="userCode">
+                  <el-input v-model="form.userCode" disabled />
                </el-form-item>
             </el-col>
          </el-row>
@@ -65,8 +65,8 @@ const pageSize = ref<number>(10)
 const roleIds = ref<number[]>([])
 const roles = ref<SysRoleWithFlag[]>([])
 const form = ref<SysUser>({
-  nickName: undefined,
   userName: undefined,
+  userCode: undefined,
   userId: undefined
 })
 

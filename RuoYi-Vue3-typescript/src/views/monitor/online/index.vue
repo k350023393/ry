@@ -10,10 +10,10 @@
                @keyup.enter="handleQuery"
             />
          </el-form-item>
-         <el-form-item label="用户名称" prop="userName">
+         <el-form-item label="用户账号" prop="userCode">
             <el-input
-               v-model="queryParams.userName"
-               placeholder="请输入用户名称"
+               v-model="queryParams.userCode"
+               placeholder="请输入用户账号"
                clearable
                style="width: 200px"
                @keyup.enter="handleQuery"
@@ -35,7 +35,7 @@
             </template>
          </el-table-column>
          <el-table-column label="会话编号" align="center" prop="tokenId" :show-overflow-tooltip="true" />
-         <el-table-column label="登录名称" align="center" prop="userName" :show-overflow-tooltip="true" />
+         <el-table-column label="登录账号" align="center" prop="userCode" :show-overflow-tooltip="true" />
          <el-table-column label="所属部门" align="center" prop="deptName" :show-overflow-tooltip="true" />
          <el-table-column label="主机" align="center" prop="ipaddr" :show-overflow-tooltip="true" />
          <el-table-column label="登录地点" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
@@ -71,7 +71,7 @@ const pageSize = ref<number>(10)
 
 const queryParams = ref<OnlineQueryParams>({
   ipaddr: undefined,
-  userName: undefined
+  userCode: undefined
 })
 
 /** 查询登录日志列表 */
@@ -98,7 +98,7 @@ function resetQuery() {
 
 /** 强退按钮操作 */
 function handleForceLogout(row: SysUserOnline) {
-  proxy.$modal.confirm('是否确认强退名称为"' + row.userName + '"的用户?').then(function () {
+  proxy.$modal.confirm('是否确认强退账号为"' + row.userCode + '"的用户?').then(function () {
     return forceLogout(row.tokenId!)
   }).then(() => {
     getList()

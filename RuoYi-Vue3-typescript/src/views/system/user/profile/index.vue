@@ -14,6 +14,10 @@
                   </div>
                   <ul class="list-group list-group-striped">
                      <li class="list-group-item">
+                        <svg-icon icon-class="user" />用户账号
+                        <div class="pull-right">{{ state.user.userCode }}</div>
+                     </li>
+                     <li class="list-group-item">
                         <svg-icon icon-class="user" />用户名称
                         <div class="pull-right">{{ state.user.userName }}</div>
                      </li>

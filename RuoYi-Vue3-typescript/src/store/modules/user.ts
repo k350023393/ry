@@ -9,7 +9,7 @@ interface UserState {
   token: string | undefined
   id: string | number
   name: string
-  nickName: string
+  userName: string
   avatar: string
   roles: string[]
   permissions: string[]
@@ -22,7 +22,7 @@ const useUserStore = defineStore(
       token: getToken(),
       id: '',
       name: '',
-      nickName: '',
+      userName: '',
       avatar: '',
       roles: [],
       permissions: []
@@ -60,8 +60,8 @@ const useUserStore = defineStore(
               this.roles = ['ROLE_DEFAULT']
             }
             this.id = user.userId || ''
-            this.name = user.userName || ''
-            this.nickName = user.nickName || ''
+            this.name = user.userCode || ''
+            this.userName = user.userName || ''
             this.avatar = avatar
             /* 初始密码提示 */
             if(res.isDefaultModifyPwd) {

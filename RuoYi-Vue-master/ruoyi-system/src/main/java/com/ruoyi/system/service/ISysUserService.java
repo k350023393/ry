@@ -36,12 +36,12 @@ public interface ISysUserService
     public List<SysUser> selectUnallocatedList(SysUser user);
 
     /**
-     * 通过用户名查询用户
+     * 通过用户账号查询用户
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 用户对象信息
      */
-    public SysUser selectUserByUserName(String userName);
+    public SysUser selectUserByUserCode(String userCode);
 
     /**
      * 通过用户ID查询用户
@@ -52,28 +52,28 @@ public interface ISysUserService
     public SysUser selectUserById(Long userId);
 
     /**
-     * 根据用户ID查询用户所属角色组
+     * 根据用户账号查询用户所属角色组
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 结果
      */
-    public String selectUserRoleGroup(String userName);
+    public String selectUserRoleGroup(String userCode);
 
     /**
-     * 根据用户ID查询用户所属岗位组
+     * 根据用户账号查询用户所属岗位组
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 结果
      */
-    public String selectUserPostGroup(String userName);
+    public String selectUserPostGroup(String userCode);
 
     /**
-     * 校验用户名称是否唯一
+     * 校验用户账号是否唯一
      * 
      * @param user 用户信息
      * @return 结果
      */
-    public boolean checkUserNameUnique(SysUser user);
+    public boolean checkUserCodeUnique(SysUser user);
 
     /**
      * 校验手机号码是否唯一

@@ -33,11 +33,11 @@ public class SysUser extends BaseEntity
 
     /** 用户账号 */
     @Excel(name = "登录名称")
-    private String userName;
+    private String userCode;
 
-    /** 用户昵称 */
+    /** 用户名称 */
     @Excel(name = "用户名称")
-    private String nickName;
+    private String userName;
 
     /** 用户邮箱 */
     @Excel(name = "用户邮箱")
@@ -129,21 +129,8 @@ public class SysUser extends BaseEntity
         this.deptId = deptId;
     }
 
-    @Xss(message = "用户昵称不能包含脚本字符")
-    @Size(min = 0, max = 30, message = "用户昵称长度不能超过30个字符")
-    public String getNickName()
-    {
-        return nickName;
-    }
-
-    public void setNickName(String nickName)
-    {
-        this.nickName = nickName;
-    }
-
-    @Xss(message = "用户账号不能包含脚本字符")
-    @NotBlank(message = "用户账号不能为空")
-    @Size(min = 0, max = 30, message = "用户账号长度不能超过30个字符")
+    @Xss(message = "用户名称不能包含脚本字符")
+    @Size(min = 0, max = 30, message = "用户名称长度不能超过30个字符")
     public String getUserName()
     {
         return userName;
@@ -152,6 +139,19 @@ public class SysUser extends BaseEntity
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    @Xss(message = "用户账号不能包含脚本字符")
+    @NotBlank(message = "用户账号不能为空")
+    @Size(min = 0, max = 30, message = "用户账号长度不能超过30个字符")
+    public String getUserCode()
+    {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode)
+    {
+        this.userCode = userCode;
     }
 
     @Email(message = "邮箱格式不正确")
@@ -313,8 +313,8 @@ public class SysUser extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("userId", getUserId())
             .append("deptId", getDeptId())
+            .append("userCode", getUserCode())
             .append("userName", getUserName())
-            .append("nickName", getNickName())
             .append("email", getEmail())
             .append("phonenumber", getPhonenumber())
             .append("sex", getSex())

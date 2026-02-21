@@ -13,8 +13,8 @@ public class SysUserOnline
     /** 部门名称 */
     private String deptName;
 
-    /** 用户名称 */
-    private String userName;
+    /** 用户账号 */
+    private String userCode;
 
     /** 登录IP地址 */
     private String ipaddr;
@@ -51,14 +51,14 @@ public class SysUserOnline
         this.deptName = deptName;
     }
 
-    public String getUserName()
+    public String getUserCode()
     {
-        return userName;
+        return userCode;
     }
 
-    public void setUserName(String userName)
+    public void setUserCode(String userCode)
     {
-        this.userName = userName;
+        this.userCode = userCode;
     }
 
     public String getIpaddr()

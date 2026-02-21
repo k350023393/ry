@@ -2,8 +2,8 @@
 export interface OnlineQueryParams {
   /** 登录地址 */
   ipaddr?: string;
-  /** 用户名称 */
-  userName?: string;
+  /** 用户账号 */
+  userCode?: string;
 }
 
 /** 在线用户信息 */
@@ -12,8 +12,8 @@ export interface SysUserOnline {
   tokenId?: string;
   /** 部门名称 */
   deptName?: string;
-  /** 用户名称 */
-  userName?: string;
+  /** 用户账号 */
+  userCode?: string;
   /** 登录IP */
   ipaddr?: string;
   /** 登录地址 */

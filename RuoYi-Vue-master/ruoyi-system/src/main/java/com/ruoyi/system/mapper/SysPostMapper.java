@@ -44,10 +44,10 @@ public interface SysPostMapper
     /**
      * 查询用户所属岗位组
      * 
-     * @param userName 用户名
+     * @param userCode 用户账号
      * @return 结果
      */
-    public List<SysPost> selectPostsByUserName(String userName);
+    public List<SysPost> selectPostsByUserCode(String userCode);
 
     /**
      * 删除岗位信息

@@ -73,10 +73,10 @@ public class SysLogininforController extends BaseController
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:unlock')")
     @Log(title = "账户解锁", businessType = BusinessType.OTHER)
-    @GetMapping("/unlock/{userName}")
-    public AjaxResult unlock(@PathVariable("userName") String userName)
+    @GetMapping("/unlock/{userCode}")
+    public AjaxResult unlock(@PathVariable("userCode") String userCode)
     {
-        passwordService.clearLoginRecordCache(userName);
+        passwordService.clearLoginRecordCache(userCode);
         return success();
     }
 }
