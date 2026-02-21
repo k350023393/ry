@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="96px">
       <el-form-item label="项目编号" prop="projectCode">
         <el-input
           v-model="queryParams.projectCode"
@@ -89,50 +89,10 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="项目经理编号" prop="managerId">
+      <el-form-item label="项目经理" prop="managerId">
         <el-input
           v-model="queryParams.managerId"
-          placeholder="请输入项目经理编号"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="客户项目经理编号" prop="custManagerId">
-        <el-input
-          v-model="queryParams.custManagerId"
-          placeholder="请输入客户项目经理编号"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="项目进度(0-100)" prop="progress">
-        <el-input
-          v-model="queryParams.progress"
-          placeholder="请输入项目进度(0-100)"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="项目预算" prop="budget">
-        <el-input
-          v-model="queryParams.budget"
-          placeholder="请输入项目预算"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="预计已投入工作量" prop="preWorkloadByhour">
-        <el-input
-          v-model="queryParams.preWorkloadByhour"
-          placeholder="请输入预计已投入工作量"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="累计已投入工作量" prop="actWorkloadByhour">
-        <el-input
-          v-model="queryParams.actWorkloadByhour"
-          placeholder="请输入累计已投入工作量"
+          placeholder="请输入项目经理"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -187,10 +147,9 @@
 
     <el-table v-loading="loading" :data="projectList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+      <el-table-column v-if="false" label="id" align="center" prop="id" />
       <el-table-column label="项目编号" align="center" prop="projectCode" />
-      <el-table-column label="项目名称" align="center" prop="projectName" />
-      <el-table-column label="项目全称" align="center" prop="projectFullName" />
+      <el-table-column label="项目名称" align="center" prop="projectName" width="120"/>
       <el-table-column label="项目类型" align="center" prop="projectType">
         <template #default="scope">
           <dict-tag :options="p_type" :value="scope.row.projectType"/>
@@ -201,22 +160,22 @@
           <dict-tag :options="p_kind" :value="scope.row.projectKind"/>
         </template>
       </el-table-column>
-      <el-table-column label="项目大类" align="center" prop="projectClass">
+      <el-table-column label="项目大类" align="center" prop="projectClass" width="180">
         <template #default="scope">
           <dict-tag :options="p_class" :value="scope.row.projectClass"/>
         </template>
       </el-table-column>
-      <el-table-column label="开始日期" align="center" prop="startDate" width="180">
+      <el-table-column label="开始日期" align="center" prop="startDate" width="120">
         <template #default="scope">
           <span>{{ parseTime(scope.row.startDate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="结束日期" align="center" prop="endDate" width="180">
+      <el-table-column label="结束日期" align="center" prop="endDate" width="120">
         <template #default="scope">
           <span>{{ parseTime(scope.row.endDate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="实际结束日期" align="center" prop="actEndDate" width="180">
+      <el-table-column label="实际结束日期" align="center" prop="actEndDate" width="120">
         <template #default="scope">
           <span>{{ parseTime(scope.row.actEndDate, '{y}-{m}-{d}') }}</span>
         </template>
@@ -226,19 +185,16 @@
           <dict-tag :options="p_status" :value="scope.row.status"/>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" />
-      <el-table-column label="项目经理编号" align="center" prop="managerId" />
-      <el-table-column label="客户项目经理编号" align="center" prop="custManagerId" />
-      <el-table-column label="项目进度(0-100)" align="center" prop="progress" />
-      <el-table-column label="项目预算" align="center" prop="budget" />
-      <el-table-column label="预计已投入工作量" align="center" prop="preWorkloadByhour" />
-      <el-table-column label="累计已投入工作量" align="center" prop="actWorkloadByhour" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="项目经理" align="center" prop="managerId" />
+      <el-table-column v-if="false" label="客户项目经理" align="center" prop="custManagerId" />
+      <el-table-column label="项目进度(%)" align="center" prop="progress">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:project:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:project:remove']">删除</el-button>
+          <el-progress :percentage="Number(scope.row.progress)" text-inside :stroke-width="18" :color="Number(scope.row.progress) === 100 ? '#67c23a' : '#409eff'" />
         </template>
       </el-table-column>
+      <el-table-column label="项目预算(万)" align="center" prop="budget" />
+      <el-table-column label="预计已投入工作量(时)" align="center" prop="preWorkloadByhour" />
+      <el-table-column label="累计已投入工作量(时)" align="center" prop="actWorkloadByhour" />
     </el-table>
     
     <pagination
